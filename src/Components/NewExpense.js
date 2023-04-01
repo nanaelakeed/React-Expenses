@@ -19,4 +19,6 @@ const NewExpense = (props) => {
 
 }
 
+
+//to import this function in another file
 export default NewExpense;

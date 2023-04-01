@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import Expenses from "./Components/Expenses";
 import NewExpense from "./Components/NewExpense";
+import NewUserForm from "./Components/Users/NewUserForm";
+import NewUser from "./Components/Users/NewUser";
+import User from "./Components/Users/User";
 
 const DummyExpenses = [
     {
@@ -23,9 +26,16 @@ const DummyExpenses = [
         date: new Date(2021, 5, 12),
     },
 ];
-
+const USers = [
+    {
+        id : 1,
+        name : "afnan",
+        age : 22,
+    },
+]
 function App() {
     const [expenses, setExpenses] = useState(DummyExpenses);
+    const [users,setUser]=useState([]);
 
     const saveExpense = (expense) => {
         setExpenses(prevState => {
@@ -33,8 +43,17 @@ function App() {
         });
     };
 
+    const saveUser = (user) => {
+        // @ts-ignore
+        setUser((prevState) => {
+           return [...prevState,user];
+        });
+    };
+
     return (
         <div>
+            <NewUser onSaveNewUser={saveUser} />
+            <User users={users} />
             <NewExpense onSaveNewExpense={saveExpense}/>
             <Expenses items={expenses}/>
         </div>
