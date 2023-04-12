@@ -26,13 +26,7 @@ const DummyExpenses = [
         date: new Date(2021, 5, 12),
     },
 ];
-const USers = [
-    {
-        id : 1,
-        name : "afnan",
-        age : 22,
-    },
-]
+
 function App() {
     const [expenses, setExpenses] = useState(DummyExpenses);
     const [users,setUser]=useState([]);
@@ -51,12 +45,13 @@ function App() {
     };
 
     return (
-        <div>
+        // = <div>  , <>
+        <React.Fragment>
             <NewUser onSaveNewUser={saveUser} />
             <User users={users} />
             <NewExpense onSaveNewExpense={saveExpense}/>
             <Expenses items={expenses}/>
-        </div>
+        </React.Fragment>
     );
 }
 
