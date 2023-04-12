@@ -11,6 +11,7 @@ const User = (props) => {
             <UserShow
                 name={user.name}
                 age={user.age}
+                key={user.id}
             />
             ) )}
         </ul>

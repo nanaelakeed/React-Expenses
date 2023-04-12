@@ -1,11 +1,12 @@
 import React from "react"
 import {useState} from "react";
-import User from "./User";
+import ErrorModel from "../Error/ErrorModel";
 
 
 const NewUserForm = (props) => {
     const [enteredName,setName]=useState("");
     const [enteredAge,setAge]=useState("");
+    const [error,setError]=useState("");
 
     const nameHandller = (event) =>{
         setName(event.target.value);
@@ -24,10 +25,14 @@ const NewUserForm = (props) => {
             age : enteredAge ,
         };
         if(enteredName.trim().length===0 || enteredAge.trim().length===0){
-
+            setError("Please Enter a valid name and age!")
+            //Not to save empty user I put return
+            return;
         }
         if( +enteredAge<1){
-
+            setError("Enter a valid age!")
+            //Not to save empty user I put return
+            return;
         }
         props.onSaveUser(userData);
         setName("");
@@ -35,8 +40,14 @@ const NewUserForm = (props) => {
 
       }
 
+      const ErroHandller = () => {
+        setError(null);
+      }
+
 
     return (
+        <div>
+            {error && <ErrorModel message={error} error1={ErroHandller}/> }
         <form onSubmit={SubmitHandller}>
             <div className={"new-expense__controls"}>
                 <div className={"new-expense__control"}>
@@ -50,7 +61,7 @@ const NewUserForm = (props) => {
             </div>
             <button type={"submit"}>Submit</button>
         </form>
-
+        </div>
     );
 }
 
